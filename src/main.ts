@@ -16,4 +16,7 @@ export const loop = ErrorMapper.wrapLoop(() => {
     const creep = Game.creeps[name];
     CreateCreep.run(creep);
   }
+  for (const spawnName in Game.spawns) {
+    Game.spawns.spawnName.spawnCreep([WORK, CARRY, MOVE], new Date().getTime().toString(),);
+  }
 });

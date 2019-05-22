@@ -13,5 +13,8 @@ export class CreateCreep {
       }
     }
   }
-
+  
+  public static create(spawnName:string):void{
+    console.log(spawnName);
+  }
 }
