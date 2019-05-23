@@ -6,9 +6,12 @@ import {CreateCreep} from "./createCreep/createCreep";
 export const loop = ErrorMapper.wrapLoop(() => {
   // console.log(`Current game tick is ${Game.time}`);
 
+  let countCreeps = 0;
   // Automatically delete memory of missing creeps
   for (const name in Memory.creeps) {
+    countCreeps += 1;
     if (!(name in Game.creeps)) {
+      countCreeps += -1;
       delete Memory.creeps[name];
     }
   }
@@ -17,6 +20,8 @@ export const loop = ErrorMapper.wrapLoop(() => {
     CreateCreep.run(creep);
   }
   for (const spawnName in Game.spawns) {
-    Game.spawns[spawnName].spawnCreep([WORK, CARRY, MOVE], new Date().getTime().toString(),);
+    if (countCreeps < 3) {
+      Game.spawns[spawnName].spawnCreep([WORK, CARRY, MOVE], new Date().getTime().toString(),);
+    }
   }
 });
