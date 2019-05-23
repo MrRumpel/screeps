@@ -1,5 +1,4 @@
 export class CreateCreep {
-
   public static run(creep: Creep): void {
     if (creep.carry.energy < creep.carryCapacity) {
       const sources = creep.room.find(FIND_SOURCES);
@@ -13,8 +12,8 @@ export class CreateCreep {
       }
     }
   }
-  
-  public static create(spawnName:string):void{
-    console.log(spawnName);
+
+  public static createHarvest(spawnName: string, hash: string): void {
+    Game.spawns[spawnName].spawnCreep([WORK, CARRY, MOVE], hash, {memory: {role: 'harvest'}});
   }
 }
