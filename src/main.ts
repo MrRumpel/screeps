@@ -21,7 +21,10 @@ export const loop = ErrorMapper.wrapLoop(() => {
   }
   for (const spawnName in Game.spawns) {
     if (countCreeps < 3) {
-      Game.spawns[spawnName].spawnCreep([WORK, CARRY, MOVE], new Date().getTime().toString(),);
+      const hash = new Date().getTime().toString();
+      if (Game.spawns[spawnName].spawnCreep([WORK, CARRY, MOVE], hash) === 0) {
+        Game.creeps[hash].memory.role = 'harvest';
+      }
     }
   }
 });
