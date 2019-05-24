@@ -17,7 +17,12 @@ export const loop = ErrorMapper.wrapLoop(() => {
   }
   for (const name in Game.creeps) {
     const creep = Game.creeps[name];
-    CreateCreep.run(creep);
+    if (creep.memory.role === 'harvester') {
+      CreateCreep.harvester(creep);
+    }
+    if (creep.memory.role === 'upgrader') {
+      CreateCreep.upgrader(creep);
+    }
   }
   for (const spawnName in Game.spawns) {
     const hash = new Date().getTime().toString();
@@ -25,4 +30,6 @@ export const loop = ErrorMapper.wrapLoop(() => {
       CreateCreep.createHarvest(spawnName, hash);
     }
   }
+  const harvesters = _.filter(Game.creeps, (creep) => creep.memory.role === 'harvester');
+  console.log('Harvesters: ' + harvesters.length);
 });

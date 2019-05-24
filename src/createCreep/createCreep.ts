@@ -1,5 +1,5 @@
 export class CreateCreep {
-  public static run(creep: Creep): void {
+  public static harvester(creep: Creep): void {
     if (creep.carry.energy < creep.carryCapacity) {
       const sources = creep.room.find(FIND_SOURCES);
       if (creep.harvest(sources[0]) === ERR_NOT_IN_RANGE) {
@@ -15,5 +15,9 @@ export class CreateCreep {
 
   public static createHarvest(spawnName: string, hash: string): void {
     Game.spawns[spawnName].spawnCreep([WORK, CARRY, MOVE], hash, {memory: {role: 'harvest'}});
+  }
+
+  public static upgrader(creep: Creep):void {
+    console.log(JSON.stringify(creep));
   }
 }
